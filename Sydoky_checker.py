@@ -22,7 +22,7 @@ data = [
   [3, 4, 5, 2, 8, 6, 1, 7, 9]
 ]
 
-def Sydoky_checker():
+def Sydoky_checker(data):
 	ideal_massiv = [1, 2, 3, 4, 5, 6, 7, 8, 9]
 
 	stolbs = [0] * 9
@@ -48,20 +48,22 @@ def Sydoky_checker():
 	for count_blocks in range(3): # 3 блока в общем блоке
 		counter = 0
 		local_massiv = [] # складываем сюда числа
-		for number in block_1: # чекаем по 6 чисел в блоке
+		for number in block_1: # чекаем по 9 чисел в блоке
 			if counter != 9:
 				local_massiv.append(number)
 			else:
 				break
 			counter += 1
 		local_massiv.sort()
-		#print(local_massiv)
 		if local_massiv != ideal_massiv:
 			return False
 
 	for stolb_number in range(0, 9):
 		for number_stolb in range(0, 9):
-			stolbs[stolb_number][number_stolb] = data[number_stolb][stolb_number]
+			try:
+				stolbs[stolb_number][number_stolb] = data[number_stolb][stolb_number]
+			except:
+				return False
 		stolbs[stolb_number].sort()
 
 		if stolbs[stolb_number] != ideal_massiv:
@@ -72,9 +74,6 @@ def Sydoky_checker():
 		if str_number != ideal_massiv:
 			return False
 
-	
+	return Success
 
-	if Success == True:
-		return True
-
-print(Sydoky_checker())
+print(Sydoky_checker(data))
